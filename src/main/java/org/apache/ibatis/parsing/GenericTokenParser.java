@@ -16,6 +16,7 @@
 package org.apache.ibatis.parsing;
 
 /**
+ * 其实质就是处理${a}=b  #{a}=c  .  #能防止sql注入，而$则不能
  * @author Clinton Begin
  */
 public class GenericTokenParser {
@@ -85,5 +86,20 @@ public class GenericTokenParser {
       builder.append(src, offset, src.length - offset);
     }
     return builder.toString();
+  }
+
+  public static void main(String[] args) {
+    GenericTokenParser genericTokenParser = new GenericTokenParser("${", "}", new TokenHandler() {
+      @Override
+      public String handleToken(String content) {
+        return "789";
+      }
+    });
+    String parse = genericTokenParser.parse("${3456}");
+    System.out.println(parse);
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("abc");
+    stringBuilder.insert(1,"hello");
+    System.out.println(stringBuilder.toString());
   }
 }
