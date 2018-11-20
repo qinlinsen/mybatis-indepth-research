@@ -73,4 +73,18 @@ public class PropertyTokenizer implements Iterator<PropertyTokenizer> {
   public void remove() {
     throw new UnsupportedOperationException("Remove is not supported, as it has no meaning in the context of properties.");
   }
+
+  public static void main(String[] args) {
+    String fullName="orders[0].items[0].name";
+    PropertyTokenizer propertyTokenizer = new PropertyTokenizer(fullName);
+    while (propertyTokenizer.hasNext()) {
+      String name = propertyTokenizer.getName();
+      String children = propertyTokenizer.getChildren();
+      String indexedName = propertyTokenizer.getIndexedName();
+      String index = propertyTokenizer.getIndex();
+      System.out.println("name="+name+" indexName="+indexedName+" index="+index+" children="+children);
+      System.out.println("***************************************************************************");
+      propertyTokenizer=propertyTokenizer.next();
+    }
+  }
 }
