@@ -49,7 +49,7 @@ public class MetaClassTest {
   }
 
   @Test
-  public void shouldCheckGetterExistance() {
+  public void shouldCheckGetterExistence() {
     ReflectorFactory reflectorFactory = new DefaultReflectorFactory();
     MetaClass meta = MetaClass.forClass(RichType.class, reflectorFactory);
     assertTrue(meta.hasGetter("richField"));

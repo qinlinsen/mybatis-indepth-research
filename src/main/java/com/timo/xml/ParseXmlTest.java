@@ -16,7 +16,11 @@ import java.io.File;
  * @since 2018/11/11
  */
 public class ParseXmlTest {
-    private static final String XPath_EXPRESSION = "//book[price>40]/title/text()|//book[price>40]/@*";
+    //价格大于40的书籍的属性
+    //@*匹配任何属性节点：
+    //*匹配任何元素元素
+    //@选取属性
+    private static final String XPath_EXPRESSION = "//book[price>40]/@*";
     public static void main(String[] args) throws Exception {
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();

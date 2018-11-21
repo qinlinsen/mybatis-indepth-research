@@ -150,4 +150,10 @@ public class ArrayUtil {
     }
   }
 
+  public static void main(String[] args) {
+    int[] a = {1, 2, 3};
+    Integer[] b = {1, 2, 3};
+    boolean equals = ArrayUtil.equals(a, b);
+    System.out.println(equals);
+  }
 }

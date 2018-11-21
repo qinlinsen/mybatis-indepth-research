@@ -27,12 +27,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.timo.domain.Student;
 import org.apache.ibatis.reflection.typeparam.Calculator;
 import org.apache.ibatis.reflection.typeparam.Calculator.SubCalculator;
 import org.apache.ibatis.reflection.typeparam.Level0Mapper;
 import org.apache.ibatis.reflection.typeparam.Level0Mapper.Level0InnerMapper;
 import org.apache.ibatis.reflection.typeparam.Level1Mapper;
 import org.apache.ibatis.reflection.typeparam.Level2Mapper;
+import org.apache.ibatis.submitted.ognl_enum.Person;
 import org.junit.Test;
 
 public class TypeParameterResolverTest {
@@ -41,7 +43,10 @@ public class TypeParameterResolverTest {
     Class<?> clazz = Level0Mapper.class;
     Method method = clazz.getMethod("simpleSelect");
     Type result = TypeParameterResolver.resolveReturnType(method, clazz);
+    Method simpleSelectListMethod = clazz.getMethod("simpleSelectList");
+    Type returnType = TypeParameterResolver.resolveReturnType(simpleSelectListMethod, clazz);
     assertEquals(Double.class, result);
+    assertEquals(List.class,((ParameterizedType)returnType).getRawType());
   }
 
   @Test
@@ -283,8 +288,18 @@ public class TypeParameterResolverTest {
     Class<?> clazz = Level2Mapper.class;
     Method method = clazz.getMethod("simpleSelectPrimitive", int.class);
     Type[] result = TypeParameterResolver.resolveParamTypes(method, clazz);
+    Method simpleSelectVoidMethod = clazz.getMethod("simpleSelectVoid", Integer.class);
+    Type[] types = TypeParameterResolver.resolveParamTypes(simpleSelectVoidMethod, clazz);
+    assertEquals(1,types.length);
+    assertEquals(Integer.class,types[0]);
+    Type type = TypeParameterResolver.resolveReturnType(simpleSelectVoidMethod, clazz);
+    assertEquals(void.class,type);
     assertEquals(1, result.length);
     assertEquals(int.class, result[0]);
+    System.out.println("************");
+    Field name = Student.class.getDeclaredField("name");
+    Type resolveFieldType = TypeParameterResolver.resolveFieldType(name, Student.class);
+    assertEquals(String.class,resolveFieldType);
   }
 
   @Test
@@ -294,6 +309,10 @@ public class TypeParameterResolverTest {
     Type[] result = TypeParameterResolver.resolveParamTypes(method, clazz);
     assertEquals(1, result.length);
     assertEquals(Integer.class, result[0]);
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("abc");
+    stringBuilder.deleteCharAt(0);
+    System.out.println(stringBuilder.toString());
   }
 
   @Test
