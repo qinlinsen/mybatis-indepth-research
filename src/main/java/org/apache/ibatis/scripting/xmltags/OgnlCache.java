@@ -24,6 +24,8 @@ import ognl.OgnlException;
 import org.apache.ibatis.builder.BuilderException;
 
 /**
+ * OGNL(Object Graphic Navigation Language)
+ * 对象图导航语言
  * Caches OGNL parsed expressions.
  *
  * @author Eduardo Macarron

@@ -13,4 +13,8 @@ public class MiddleStudent extends Student{
     public void setColor(String color) {
         this.color = color;
     }
+
+    public static void main(String[] args) {
+        System.out.println(Student.class.isAssignableFrom(MiddleStudent.class));
+    }
 }

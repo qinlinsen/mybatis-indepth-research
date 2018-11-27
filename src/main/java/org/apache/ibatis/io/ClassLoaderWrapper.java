@@ -15,7 +15,10 @@
  */
 package org.apache.ibatis.io;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 
 /**
@@ -210,4 +213,17 @@ public class ClassLoaderWrapper {
         systemClassLoader};
   }
 
+  public static void main(String[] args) throws Exception{
+      String JPETSTORE_PROPERTIES = "org/apache/ibatis/databases/jpetstore/jpetstore-hsqldb.properties";
+    ClassLoaderWrapper classLoaderWrapper = new ClassLoaderWrapper();
+    InputStream in = classLoaderWrapper.getResourceAsStream(JPETSTORE_PROPERTIES);
+    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+    String str="";
+    while((str=reader.readLine())!=null){
+      if(str.length()>0){
+        System.out.println(str);
+      }
+    }
+    System.out.println(  Thread.currentThread().getContextClassLoader());
+  }
 }

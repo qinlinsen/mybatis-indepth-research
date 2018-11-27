@@ -32,8 +32,9 @@ import java.util.Set;
  * @author Lasse Voss
  */
 public class MapperRegistry {
-
+  //Configuration 对象,Mybatis 全局唯一的配置对象，其中包含了所有的配置信息
   private final Configuration config;
+  //记录了Mapper接口与对应的MapperProxyFactory之间的关系，其中key是Mapper对应的Class 对象
   private final Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<>();
 
   public MapperRegistry(Configuration config) {

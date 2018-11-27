@@ -38,6 +38,7 @@ public class BlockingCache implements Cache {
 
   private long timeout;
   private final Cache delegate;
+  //每个Key都有对应的ReentrantLock
   private final ConcurrentHashMap<Object, ReentrantLock> locks;
 
   public BlockingCache(Cache delegate) {
@@ -66,8 +67,11 @@ public class BlockingCache implements Cache {
 
   @Override
   public Object getObject(Object key) {
+    //获取该key对应的锁
     acquireLock(key);
+    //查询key
     Object value = delegate.getObject(key);
+    //缓存有key对应的缓存项，释放锁，否则继续持有锁
     if (value != null) {
       releaseLock(key);
     }        

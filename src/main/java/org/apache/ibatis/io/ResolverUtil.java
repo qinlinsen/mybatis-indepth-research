@@ -21,8 +21,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.binding.MapperRegistry;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
+import org.apache.ibatis.session.Configuration;
 
 /**
  * <p>ResolverUtil is used to locate classes that are available in the/a class path and meet
@@ -264,5 +268,17 @@ public class ResolverUtil<T> {
       log.warn("Could not examine class '" + fqn + "'" + " due to a " +
           t.getClass().getName() + " with message: " + t.getMessage());
     }
+  }
+
+  public static void main(String[] args) {
+    ResolverUtil<Log> resolver = new ResolverUtil<>();
+    String packageName="org.apache.ibatis.logging";
+   /* ResolverUtil<Log> implementations = resolver.findImplementations(Log.class, packageName);
+    Set<Class<? extends Log>> classes = implementations.getClasses();
+    for(Class clz:classes){
+      System.out.println(clz.getName());
+    }*/
+    MapperRegistry mapperRegistry = new MapperRegistry(new Configuration());
+    mapperRegistry.addMappers(packageName,Log.class);
   }
 }

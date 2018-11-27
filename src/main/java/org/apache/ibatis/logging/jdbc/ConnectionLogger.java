@@ -95,4 +95,9 @@ public final class ConnectionLogger extends BaseJdbcLogger implements Invocation
     return connection;
   }
 
+  public static void main(String[] args) throws Exception {
+    Method getConnection = ConnectionLogger.class.getDeclaredMethod("getConnection");
+    Class<?> declaringClass = getConnection.getDeclaringClass();
+    System.out.println(declaringClass);
+  }
 }

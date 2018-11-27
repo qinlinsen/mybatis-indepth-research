@@ -39,13 +39,22 @@ public abstract class BaseJdbcLogger {
 
   protected static final Set<String> SET_METHODS = new HashSet<>();
   protected static final Set<String> EXECUTE_METHODS = new HashSet<>();
-
+  /**
+   * 记录了link{@link java.sql.PreparedStatement}的set*()方法设置的键值对
+   */
   private final Map<Object, Object> columnMap = new HashMap<>();
-
+  /**
+   * 记录了PreparedStatement的set*()方法设置的键
+   */
   private final List<Object> columnNames = new ArrayList<>();
+  /**
+   * 记录了PreparedStatement的set*()方法设置的值
+   */
   private final List<Object> columnValues = new ArrayList<>();
 
+  //用于输出日志的Log
   protected Log statementLog;
+  //记录SQL的层数,用于格式化输出SQL
   protected int queryStack;
 
   /*

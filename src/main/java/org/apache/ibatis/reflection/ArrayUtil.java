@@ -155,5 +155,7 @@ public class ArrayUtil {
     Integer[] b = {1, 2, 3};
     boolean equals = ArrayUtil.equals(a, b);
     System.out.println(equals);
+    String s = ArrayUtil.toString(a);
+    System.out.println(s);
   }
 }

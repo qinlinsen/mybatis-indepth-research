@@ -36,6 +36,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 /**
+ * MapperMethod对象会完成参数的转换以及SQL语句的执行
  * @author Clinton Begin
  * @author Eduardo Macarron
  * @author Lasse Voss
@@ -43,7 +44,9 @@ import java.util.*;
  */
 public class MapperMethod {
 
+  //记录了SQL语句的名称和类型
   private final SqlCommand command;
+  //Mapper接口对应方法的相关信息
   private final MethodSignature method;
 
   public MapperMethod(Class<?> mapperInterface, Method method, Configuration config) {
@@ -214,8 +217,9 @@ public class MapperMethod {
   }
 
   public static class SqlCommand {
-
+    //SQL语句的名称
     private final String name;
+    //SQL语句的类型
     private final SqlCommandType type;
 
     public SqlCommand(Configuration configuration, Class<?> mapperInterface, Method method) {

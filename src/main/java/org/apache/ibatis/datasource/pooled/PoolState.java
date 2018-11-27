@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * PoolState是用于管理PoolConnection 对象状态的组件
  * @author Clinton Begin
  */
 public class PoolState {
