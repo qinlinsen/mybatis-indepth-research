@@ -52,6 +52,7 @@ public interface SqlSession extends Closeable {
    * Retrieve a list of mapped objects from the statement key and parameter.
    * @param <E> the returned list element type
    * @param statement Unique identifier matching the statement to use.
+*                  其实这个statement就是一个id
    * @return List of mapped object
    */
   <E> List<E> selectList(String statement);
